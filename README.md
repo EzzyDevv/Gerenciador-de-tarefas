@@ -5,7 +5,7 @@
 + Python
 
 # OBJETIVOS :
-  O objetivo deste projeto é criar um programa em linha de comando (CLI) que permita ao usuário gerenciar suas tarefas diárias. O programa deve permitir que o usuário adicione, remova e liste tarefas, e também deve ser capaz de marcar tarefas como concluídas. 
+  O objetivo deste projeto é criar um programa que permita ao usuário gerenciar suas tarefas diárias. O programa deve permitir que o usuário adicione, remova e liste tarefas, e também deve ser capaz de marcar tarefas como concluídas. 
   
 # FUNÇÕES : 
 + O usuário deve ser recebido com uma mensagem de boas-vindas e um menu principal que ofereça as seguintes opções: Adicionar tarefa, Remover tarefa, Listar tarefas, Marcar tarefa como concluída e Sair.
