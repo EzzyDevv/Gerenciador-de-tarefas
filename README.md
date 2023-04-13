@@ -1,4 +1,8 @@
+
+<img src="imagem.png" alt="Exemplo" width="200" height="150" >
+
 # GERENCIADOR DE TAREFAS 
+
   :warning:EM DESENVOLVIMENTO:warning:
   
 # LINGUAGENS :
