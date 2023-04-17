@@ -3,9 +3,18 @@ import os
 from tkinter import messagebox as msb
 
 
+''' 
+====== NOTA ======
+
+CASO DE ERRO DE APRIR O ARQUIVO  PELO EXPLORE E SO MODIFICAR 
+O CAMINHO , TIRAR O NOME DA PASTA E SO DEIXAR O NOME DO ARQUIVO 
+MAS PARA EXECUTAR PELO VS DEIXA DO JEITO QUE ESTA 
+'''
+
+
 # simplificar a chamada do arquivo
 def arquivo_txt(comando):
-   return open('Gerenciador-de-tarefas/tarefas.txt' , comando) 
+   return open('Gerenciador-de-tarefa/starefas.txt' , comando) 
         
    
 
@@ -119,7 +128,7 @@ if __name__ == "__main__":
     
     # caso de erro ao ler o arquivo 
     except IOError as erro:
-        msb.showerror('Erro ao abrir o arquivo !')    
+        msb.showerror(title='Erro ao abrir ' , message=erro)    
         
    
 
