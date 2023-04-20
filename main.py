@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import ttk 
 import os
 from tkinter import messagebox as msb
 
@@ -14,7 +15,7 @@ MAS PARA EXECUTAR PELO VS DEIXA DO JEITO QUE ESTA
 
 # simplificar a chamada do arquivo
 def arquivo_txt(comando):
-   return open('Gerenciador-de-tarefa/starefas.txt' , comando) 
+   return open('Gerenciador-de-tarefas/tarefas.txt' , comando) 
         
    
 
@@ -75,10 +76,11 @@ def tarefa_feita():
 
 
 # iniciando ....
-if __name__ == "__main__":
-     # verifica se o arquivo existe , se não ele cria 
+if __name__ == "__main__": 
+    
+    # verifica se o arquivo existe , se não ele cria  
     try: 
-        if os.path.exists('Gerenciador-de-tarefas/tarefas.txt'):
+        if os.path.exists('/Gerenciador-de-tarefas/tarefas.txt'):
             with arquivo_txt('r') as arquivo:
                 conteudos = arquivo.readlines()
                   
@@ -88,6 +90,18 @@ if __name__ == "__main__":
                 conteudos = []
                 
         screen = tk.Tk()
+        screen.geometry('350x400')
+        
+        # Crie a barra de progresso
+        progress = ttk.Progressbar(screen, orient=tk.HORIZONTAL, length=200, mode='determinate')
+
+        # Inicie a animação
+        progress.start()
+
+        # Exibe a barra de progresso
+        progress.pack()
+             
+            
         # titulo 
         screen.title("Gerenciador de Tarefas")
         # define a cor de fundo
