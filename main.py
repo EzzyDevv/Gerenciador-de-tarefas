@@ -26,23 +26,7 @@ def janela():
 
 
 
-
-def menu(screen):
-    
-    texto_menu = tk.Label(screen , text="GERENCIADOR \n DE \n TARREFAS")
-    texto_menu.pack()
-    # Crie a barra de progresso
-    progress = ttk.Progressbar(screen, orient=tk.HORIZONTAL, length=200, mode='determinate' )
-    progress['value'] = 100
-    # Inicie a animação
-    progress.start()
-    progress.bind('<<ProgressbarComplete>>' , principal )
-    
-    # Exibe a barra de progresso
-    progress.pack()
-    
-    screen.mainloop()
-             
+       
 
 
 # simplificar a chamada do arquivo
@@ -50,7 +34,7 @@ def arquivo_txt(comando):
    return open('Gerenciador-de-tarefas/tarefas.txt' , comando) 
         
    
-def principal():
+def principal(screen):
         
     def adiciona():
         # Obtém a tarefa digitada na entrada de texto
@@ -157,7 +141,22 @@ def principal():
         msb.showerror(title='Erro ao abrir ' , message=erro)    
         
 
+
+def menu(screen):
     
+    texto_menu = tk.Label(screen , text="GERENCIADOR \n DE \n TARREFAS" , bg='gray' ,font=('Arial Black' , 24))
+    texto_menu.pack()
+    # Crie a barra de progresso
+    progress = ttk.Progressbar(screen, orient=tk.HORIZONTAL, length=200, mode='determinate' )
+    progress['value'] = 100
+    # Inicie a animação
+    progress.start()
+    progress.after(100 , principal(screen))
+    # Exibe a barra de progresso
+    progress.pack()
+    
+    screen.mainloop()
+          
 
 
 # iniciando ....
