@@ -34,8 +34,9 @@ def arquivo_txt(comando):
    return open('Gerenciador-de-tarefas/tarefas.txt' , comando) 
         
    
-def principal(screen):
-        
+def principal(screen2):
+    
+    #screen2 = tk.Toplevel(screen)
     def adiciona():
         # Obtém a tarefa digitada na entrada de texto
         tarefa = tarefa_entry.get()
@@ -106,12 +107,12 @@ def principal(screen):
                 
         
         # Widget para entrada de tarefa
-        tarefa_entry = tk.Entry(screen, width=50)
+        tarefa_entry = tk.Entry(screen2, width=50)
         tarefa_entry.pack(padx=10, pady=10)
         
         
         # Frame e para alinhar os botões horizontalmente
-        frame = tk.Frame(screen)
+        frame = tk.Frame(screen2)
         frame.configure(bg='gray')
         frame.pack()
 
@@ -124,11 +125,11 @@ def principal(screen):
         remove_button.pack(side= tk.LEFT, padx=10, pady=5)
 
         # Botão para tarefa feita
-        remove_button = tk.Button(screen, text="Tarefa Feita" , command=tarefa_feita)
+        remove_button = tk.Button(screen2, text="Tarefa Feita" , command=tarefa_feita)
         remove_button.pack(padx=10, pady=5)
         
         # Lista de tarefas
-        tarefa_list = tk.Listbox(screen, height=15, width=50)
+        tarefa_list = tk.Listbox(screen2, height=15, width=50)
         for conteudo in conteudos :
             tarefa_list.insert(tk.END, conteudo)
             
@@ -142,21 +143,23 @@ def principal(screen):
         
 
 
-def menu(screen):
-    
+def menu():
+    screen = janela()
     texto_menu = tk.Label(screen , text="GERENCIADOR \n DE \n TARREFAS" , bg='gray' ,font=('Arial Black' , 24))
     texto_menu.pack()
     # Crie a barra de progresso
-    progress = ttk.Progressbar(screen, orient=tk.HORIZONTAL, length=200, mode='determinate' )
-    progress['value'] = 100
-    # Inicie a animação
-    progress.start()
-    progress.after(100 , principal(screen))
-    # Exibe a barra de progresso
+    progress = ttk.Progressbar(screen, orient='horizontal', length=200, mode='determinate' )
     progress.pack()
+     
+    for i in range(10000):
+        progress['value'] += 0.01
+        screen.update()
+        if progress['value'] >= 100 :
+            screen.withdraw()
+            
+      
     
     screen.mainloop()
-          
 
 
 # iniciando ....
@@ -164,6 +167,6 @@ if __name__ == "__main__":
 
     screen = janela()
   
-    menu(screen)
-    
+    menu()
+    principal(screen)
    
