@@ -12,6 +12,7 @@ O CAMINHO , TIRAR O NOME DA PASTA E SO DEIXAR O NOME DO ARQUIVO
 MAS PARA EXECUTAR PELO VS DEIXA DO JEITO QUE ESTA 
 '''
 
+# simplificando o a janela
 def janela():
     screen = tk.Tk()
     screen.geometry('350x400')
@@ -25,18 +26,14 @@ def janela():
     return screen
 
 
-
-       
-
-
 # simplificar a chamada do arquivo
 def arquivo_txt(comando):
    return open('Gerenciador-de-tarefas/tarefas.txt' , comando) 
         
    
-def principal(screen2):
+def principal():
     
-    #screen2 = tk.Toplevel(screen)
+    screen_p = janela()
     def adiciona():
         # Obtém a tarefa digitada na entrada de texto
         tarefa = tarefa_entry.get()
@@ -96,23 +93,23 @@ def principal(screen2):
 
      # verifica se o arquivo existe , se não ele cria  
     try: 
-        if os.path.exists('/Gerenciador-de-tarefas/tarefas.txt'):
+        if os.path.exists('Gerenciador-de-tarefas/tarefas.txt'):
             with arquivo_txt('r') as arquivo:
                 conteudos = arquivo.readlines()
                 
         else :
             with arquivo_txt('w') as arquivo :
-                arquivo.write('== TAREFAS ==')
+                arquivo.write('== LISTA DE TAREFAS ==')
                 conteudos = []
                 
         
         # Widget para entrada de tarefa
-        tarefa_entry = tk.Entry(screen2, width=50)
+        tarefa_entry = tk.Entry(screen_p, width=50)
         tarefa_entry.pack(padx=10, pady=10)
         
         
         # Frame e para alinhar os botões horizontalmente
-        frame = tk.Frame(screen2)
+        frame = tk.Frame(screen_p)
         frame.configure(bg='gray')
         frame.pack()
 
@@ -125,17 +122,17 @@ def principal(screen2):
         remove_button.pack(side= tk.LEFT, padx=10, pady=5)
 
         # Botão para tarefa feita
-        remove_button = tk.Button(screen2, text="Tarefa Feita" , command=tarefa_feita)
+        remove_button = tk.Button(screen_p, text="Tarefa Feita" , command=tarefa_feita)
         remove_button.pack(padx=10, pady=5)
         
         # Lista de tarefas
-        tarefa_list = tk.Listbox(screen2, height=15, width=50)
+        tarefa_list = tk.Listbox(screen_p, height=15, width=50)
         for conteudo in conteudos :
             tarefa_list.insert(tk.END, conteudo)
             
         tarefa_list.pack(padx=10, pady=10)
         
-        screen.mainloop()    
+        screen_p.mainloop()    
     
     # caso de erro ao ler o arquivo 
     except IOError as erro:
@@ -144,29 +141,36 @@ def principal(screen2):
 
 
 def menu():
+    
     screen = janela()
+    # cria o texto de introdução
     texto_menu = tk.Label(screen , text="GERENCIADOR \n DE \n TARREFAS" , bg='gray' ,font=('Arial Black' , 24))
-    texto_menu.pack()
+    texto_menu.place(x=40,y=60)
     # Crie a barra de progresso
     progress = ttk.Progressbar(screen, orient='horizontal', length=200, mode='determinate' )
-    progress.pack()
-     
-    for i in range(10000):
-        progress['value'] += 0.01
-        screen.update()
-        if progress['value'] >= 100 :
-            screen.withdraw()
-            
-      
+    progress.place(x=80 , y= 250)
+    # mesagem de boas vindas 
+    texto_menu = tk.Label(screen , text="Bem Vindo !" , bg='gray' ,font=('Arial Black' , 18))
+    texto_menu.place(x=95,y=290)
+    
+    # função para aumentar o progresso e mudar para principal ao termino
+    def update_progress():
+        progress['value'] += 0.4
+        if progress['value'] >= 100:
+            progress.stop()
+            screen.destroy()
+            principal()
+        else:
+            screen.after(10, update_progress)
+    
+    update_progress()
     
     screen.mainloop()
 
 
 # iniciando ....
 if __name__ == "__main__": 
-
-    screen = janela()
-  
+    
     menu()
-    principal(screen)
+    
    
